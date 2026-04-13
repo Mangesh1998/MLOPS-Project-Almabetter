@@ -48,6 +48,17 @@ This repository is bifurcated into three parallel AI subsystems:
 
 ---
 
+## ⚙️ Advanced MLOps Integrations
+
+- **🌐 REST API Development:** Developed a Flask-based API to serve flight price predictions in real time.
+- **📦 Containerization with Docker:** Packaged the model and API for portability and ease of deployment.
+- **📈 Kubernetes Deployment:** Ensured scalability and efficient load management by deploying the Dockerized application using Kubernetes.
+- **🔄 Workflow Automation with Apache Airflow:** Designed and implemented DAGs to automate data preprocessing and model training workflows.
+- **🚀 CI/CD Pipeline with Jenkins:** Automated the integration and deployment process using a Jenkins pipeline, ensuring reliable and consistent releases.
+- **🧬 Model Tracking with MLFlow:** Managed model versions systematically and tracked performance metrics during iterations.
+
+---
+
 ## 🚀 Local Installation & Orchestration
 
 > **Note:** The included predictive model (`.pkl`) binaries rely on native OS extraction processes. We have provided an automation script to effortlessly synthesize them to bypass remote object storage.
