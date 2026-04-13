@@ -1,181 +1,90 @@
-# **Travel and Tourism Analytics with Machine Learning and MLOps**  
+<h1 align="center">✈️ Travel Analytics MLOps Ecosystem</h1>
 
-## **Overview**  
-This project explores the powerful intersection of **data analytics** and **machine learning** to revolutionize travel experiences. By leveraging datasets related to users, flights, and hotels, I’ve developed predictive and recommendation models that are scalable, interactive, and production-ready. The project also integrates **MLOps practices** to automate workflows, track models, and ensure seamless deployment.  
+<div align="center">
+  A comprehensive, multi-service machine learning deployment designed to orchestrate complex travel logistics algorithms seamlessly.
+</div>
+
+<br />
+
+## 🌟 Overview
+
+The **Travel Analytics Ecosystem** encompasses three distinctly specialized, scalable machine learning domains working harmoniously to address flight pricing, predictive demographics, and collaborative filtering for hotel selections. Developed with deployment resilience in mind, this project wraps predictive mathematical models into lightweight **Flask Web APIs**, coupled with visually premium and reactive **Streamlit Front-End Dashboards**.
 
 ---
 
-## **Features**  
+## 🛠 Features & Architecture
 
-### 🔍 **Flight Price Prediction**  
-- Built a regression model to predict flight prices using the `flights.csv` dataset.  
-- Optimized model performance through feature selection, training, and validation.
+This repository is bifurcated into three parallel AI subsystems:
 
-<img width="899" alt="flight_price_prediction_1" src="https://github.com/user-attachments/assets/e6af7db2-87ac-451e-924f-5354fa85a592" />
-<img width="896" alt="Flight_price_prediction_2" src="https://github.com/user-attachments/assets/92f3dd4e-667c-4bac-b5ea-2b6a1cbfe98e" />
-<img width="487" alt="flight_price_prediction_3" src="https://github.com/user-attachments/assets/5d384e1d-a533-419c-8772-21f204af4652" />
+### 1. Flight Price Predictor (`Travel_ML_System`)
+- **Objective:** Dynamically calculates ticket costs relying on destination matrices, date sequencing, and corporate agency algorithms.
+- **Modeling:** Employs a robust **RandomForestRegressor** native backend trained alongside strict mapping features.
+- **Deployment:** Streamlit Dashboard on port `8501`. Linked Flask API logic running independently on `8000`.
 
-### 🌐 **REST API Development**  
-- Developed a Flask-based API to serve flight price predictions in real time.  
+### 2. Demographic Authentication Engine (`Gender Classification Model`)
+- **Objective:** Leverages Natural Language Processing over algorithmic user arrays to perform semantic gender classifications.
+- **Modeling:** Utilizes **SentenceTransformers (Flax MiniLM)** embedded vectors processed through **Principal Component Analysis (PCA)** prior to passing through a tuned classification network.
+- **Deployment:** Streamlit Interface on `8502`. Flask RESTful pipeline running on `8001`.
 
-### 📦 **Containerization with Docker**  
-- Packaged the model and API for portability and ease of deployment.  
+### 3. Hotel Recommender Matrix (`Hotel Recommender System`)
+- **Objective:** Cross-references travel history to formulate curated hotel selections.
+- **Modeling:** Calculates dense metric relationships utilizing Sparse Matrix Factorization mapped over behavioral analytics databases.
+- **Deployment:** Streamlit Portfolio Render operating on `8503`.
 
-### 📈 **Kubernetes Deployment**  
-- Ensured scalability and efficient load management by deploying the Dockerized application using Kubernetes.  
+---
 
-### 🔄 **Workflow Automation with Apache Airflow**  
-- Designed and implemented DAGs to automate data preprocessing and model training workflows.  
+## ⚙️ Tech Stack
 
-### 🚀 **CI/CD Pipeline with Jenkins**  
-- Automated the integration and deployment process using a Jenkins pipeline, ensuring reliable and consistent releases.  
-
-### 🧬 **Model Tracking with MLFlow**  
-- Managed model versions systematically and tracked performance metrics during iterations.  
-
-### 👥 **Gender Classification Model**  
-- Deployed a classification model to predict user gender based on the `users.csv` dataset.
-
-<img width="928" alt="Gender Classification app image" src="https://github.com/user-attachments/assets/1600e998-497b-4f95-91ac-e422e2afe95c" />
-<img width="956" alt="streamlit_run_app" src="https://github.com/user-attachments/assets/9692a33a-f79c-4d63-94c6-b3ba2101ff2a" />
-<img width="722" alt="Gender_Classification_model_prediction" src="https://github.com/user-attachments/assets/593d9d65-8c2d-4d4f-a2fb-338008fe5d13" />
-
-### 🏨 **Hotel Recommendation System**  
-- Built a recommendation model for personalized hotel suggestions using user preferences and historical data.  
-- Deployed an interactive **Streamlit app** for seamless data visualization and exploration.
+<details>
+  <summary>Click to view system dependencies</summary>
   
-<img width="958" alt="Hotel_recommendation_app" src="https://github.com/user-attachments/assets/2dc91fb3-8f78-415e-8309-df0323f00313" />
+- **Python**: 3.11.x
+- **Core ML Frameworks**: `scikit-learn`, `SentenceTransformers`, `pandas`, `numpy`
+- **Front-End Interfaces**: `streamlit`
+- **Back-End Orchestration**: `flask`
+- **Containerization**: `docker` (optional mapping available)
 
-
-
----
-
-## **Tech Stack**  
-
-### **Programming Languages & Libraries**  
-- **Python**: Pandas, NumPy, Scikit-Learn, Matplotlib, Seaborn, Streamlit, Flask  
-- **MLOps Tools**: Docker, Kubernetes, Apache Airflow, Jenkins, MLFlow  
-
-### **Platforms**  
-- **Version Control**: GitHub  
-- **Deployment**: Docker Hub, Kubernetes  
+</details>
 
 ---
 
-## **Project Structure**  
+## 🚀 Local Installation & Orchestration
 
-```plaintext  
-├── data/  
-│   ├── flights.csv  
-│   ├── users.csv  
-│   ├── hotels.csv  
-├── models/  
-│   ├── regression_model.py  
-│   ├── gender_classification_model.py  
-│   ├── recommendation_model.py  
-├── api/  
-│   ├── app.py (Flask API for flight price prediction)  
-├── workflows/  
-│   ├── airflow_dag.py (Airflow DAG for automation)  
-├── deployment/  
-│   ├── Dockerfile  
-│   ├── kubernetes_deployment.yaml  
-├── ci_cd/  
-│   ├── Jenkinsfile  
-├── app/  
-│   ├── streamlit_app.py (Hotel recommendation interface)  
-├── README.md  
-└── requirements.txt  
-```  
+> **Note:** The included predictive model (`.pkl`) binaries rely on native OS extraction processes. We have provided an automation script to effortlessly synthesize them to bypass remote object storage.
 
----
+### 1. Environment Initialization
+First, clone the project locally and download prerequisite framework distributions:
+```bash
+git clone https://github.com/Mangesh1998/MLOPS-Project-Almabetter.git
+cd MLOPS-Project-Almabetter
+python -m venv venv
 
-## **Setup Instructions**  
+# Activate Environment (Windows/PowerShell)
+.\venv\Scripts\Activate.ps1
 
-### **Prerequisites**  
-- Python 3.8+  
-- Docker and Kubernetes installed  
-- Apache Airflow  
-- Jenkins setup for CI/CD  
+pip install -r requirements_all.txt
+```
 
-### **Steps to Run the Project**  
+### 2. Executing the Environment Sequence
+To safely bypass legacy execution parameters and natively bind the five application layers, run our master PowerShell orchestrator:
+```bash
+.\run_all.ps1
+```
+*(This gracefully isolates each interface and allocates execution arrays strictly matched to local file origins.)*
 
-1. **Clone the Repository**  
-   ```bash  
-   git clone https://github.com/your-repo-url.git  
-   cd your-repo-folder  
-   ```  
+**The Ecosystem will instantly spin up:**
+- Flight Prediction: [http://localhost:8501](http://localhost:8501)
+- Gender Matrix: [http://localhost:8502](http://localhost:8502)
+- Recommender Space: [http://localhost:8503](http://localhost:8503)
 
-2. **Install Dependencies**  
-   ```bash  
-   pip install -r requirements.txt  
-   ```  
-
-3. **Run the Flask API**  
-   ```bash  
-   cd api  
-   python app.py  
-   ```  
-
-4. **Dockerize the Application**  
-   ```bash  
-   docker build -t flight-price-predictor .  
-   docker run -p 5000:5000 flight-price-predictor  
-   ```  
-
-5. **Deploy on Kubernetes**  
-   ```bash  
-   kubectl apply -f deployment/kubernetes_deployment.yaml  
-   ```  
-
-6. **Set Up Airflow DAGs**  
-   - Follow the instructions in `workflows/airflow_dag.py`.  
-
-7. **Access the Streamlit App**  
-   ```bash  
-   streamlit run app/streamlit_app.py  
-   ```  
+### 3. Custom Model Compilation
+If desired, directly formulate your own predictive models mapped exactly to UI dimensions:
+```bash
+python train_models.py
+```
 
 ---
 
-## **Evaluation Metrics**  
-
-### **Regression Model**  
-- RMSE (Root Mean Squared Error)  
-- R² Score  
-
-### **Classification Model**  
-- Accuracy  
-- Precision & Recall  
-
-### **Recommendation System**  
-- Precision@K  
-
----
-
-## **Results & Insights**  
-- **Flight Price Prediction** achieved a high R² score with minimal error.  
-- **Gender Classification Model** provided accurate predictions with balanced precision and recall.  
-- **Hotel Recommendation System** enhanced user satisfaction by offering tailored suggestions.  
-
----
-
-## **GitHub Contributions**  
-- Organized commits reflecting development progress.  
-- Comprehensive documentation in the repository.  
-
----
-
-## **Future Enhancements**  
-- Incorporating more datasets for richer insights.  
-- Expanding the recommendation engine for multi-modal preferences.  
-- Enhancing CI/CD pipelines with more automation.  
-
----
-
-## **Contact**  
-For any questions or feedback, feel free to reach out:  
-📧 Email: ksouvik98@gmil.com 
-💼 LinkedIn: https://www.linkedin.com/in/souvik-karmakar83/ 
-
-
+<div align="center">
+  <i>Maintained and tailored natively for rapid local web ecosystem execution.</i>
+</div>
