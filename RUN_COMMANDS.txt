@@ -1,0 +1,81 @@
+MLOPS-Project-Almabetter - Run Commands (Windows PowerShell)
+=============================================================
+
+Project path:
+C:\Users\rohan\Desktop\Antigravity_project\MLOPS-Project-Almabetter
+
+------------------------------------------------------------
+1) Go to project
+------------------------------------------------------------
+cd C:\Users\rohan\Desktop\Antigravity_project\MLOPS-Project-Almabetter
+
+------------------------------------------------------------
+2) Create and activate virtual environment
+------------------------------------------------------------
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+If PowerShell blocks activation, run once:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+------------------------------------------------------------
+3) Install dependencies
+------------------------------------------------------------
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+Important:
+This project's hotel recommender uses mlflow during model training/unpickling.
+If missing, install manually:
+pip install mlflow
+
+------------------------------------------------------------
+4) Start backend API (Terminal 1)
+------------------------------------------------------------
+cd C:\Users\rohan\Desktop\Antigravity_project\MLOPS-Project-Almabetter
+.\venv\Scripts\Activate.ps1
+python api\app.py
+
+API URL:
+http://localhost:8000
+
+Health check (new terminal):
+Invoke-WebRequest -UseBasicParsing http://localhost:8000/health | Select-Object -ExpandProperty Content
+
+------------------------------------------------------------
+5) Start Streamlit UI (Terminal 2)
+------------------------------------------------------------
+cd C:\Users\rohan\Desktop\Antigravity_project\MLOPS-Project-Almabetter
+.\venv\Scripts\Activate.ps1
+streamlit run app\ui.py --server.port 8501 --server.headless true
+
+UI URL:
+http://localhost:8501
+
+------------------------------------------------------------
+6) If Hotel Recommender errors due to model file/pointer
+------------------------------------------------------------
+cd C:\Users\rohan\Desktop\Antigravity_project\MLOPS-Project-Almabetter
+.\venv\Scripts\Activate.ps1
+python models\recommendation_model.py
+
+Then restart Streamlit:
+streamlit run app\ui.py --server.port 8501 --server.headless true
+
+------------------------------------------------------------
+7) Stop running services
+------------------------------------------------------------
+In each terminal, press:
+Ctrl + C
+
+Or force-kill by port:
+Get-NetTCPConnection -LocalPort 8000,8501 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force }
+
+------------------------------------------------------------
+8) Optional Docker run
+------------------------------------------------------------
+cd C:\Users\rohan\Desktop\Antigravity_project\MLOPS-Project-Almabetter
+docker compose up --build
+
+Stop Docker:
+docker compose down

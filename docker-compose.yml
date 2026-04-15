@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    container_name: mlops_api
+    ports:
+      - "8000:8000"
+    command: python api/app.py
+    restart: always
+
+  ui:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    container_name: mlops_ui
+    ports:
+      - "8501:8501"
+    command: streamlit run app/ui.py --server.port=8501 --server.address=0.0.0.0
+    depends_on:
+      - api
+    restart: always

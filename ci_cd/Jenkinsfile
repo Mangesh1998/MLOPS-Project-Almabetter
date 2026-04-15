@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    
+    environment {
+        DOCKER_IMAGE = 'mlops-travel-system-v2'
+        DOCKER_TAG = "v2.${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('Install Base Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+                sh 'pip install mlflow'
+            }
+        }
+        
+        stage('Model Training with MLFlow') {
+            steps {
+                sh 'python models/regression_model.py'
+                sh 'python models/gender_classification_model.py'
+                sh 'python models/recommendation_model.py'
+            }
+        }
+        
+        stage('Docker Build (Optimized)') {
+            steps {
+                script {
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} -f deployment/Dockerfile ."
+                }
+            }
+        }
+        
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    sh "kubectl apply -f kubernetes/deployment.yaml"
+                    sh "kubectl apply -f kubernetes/service.yaml"
+                    sh "kubectl set image deployment/mlops-unified-deployment mlops-app=${DOCKER_IMAGE}:${DOCKER_TAG}"
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

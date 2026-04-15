@@ -1,0 +1,190 @@
+Travel Analytics MLOps Ecosystem - Detailed Class Presentation Script
+====================================================================
+
+Duration: 15 minutes
+Project: MLOPS-Project-Almabetter
+
+--------------------------------------------------------------------
+0:00 - 1:00 | Opening
+--------------------------------------------------------------------
+"Good [morning/afternoon], everyone.
+Today I am presenting my MLOps project: Travel Analytics MLOps Ecosystem.
+This project combines three machine learning applications into one deployable system:
+1) Flight price prediction
+2) Gender classification
+3) Hotel recommendation
+
+This is an MLOps project because it includes the complete lifecycle:
+training scripts, model artifacts, API serving, UI serving, experiment tracking with MLflow,
+and deployment setup using Docker and Kubernetes assets."
+
+Reference file to show:
+- README.md
+
+--------------------------------------------------------------------
+1:00 - 2:30 | Problem Statement and Objective
+--------------------------------------------------------------------
+"In many ML projects, models remain inside notebooks and are hard to use by real users.
+The objective of this project is to operationalize models:
+convert trained models into reusable artifacts,
+serve them through APIs,
+connect them to a user-friendly dashboard,
+and package the full system so it can be reproduced and deployed consistently."
+
+"So this project solves both prediction problems and operational problems."
+
+Reference file:
+- README.md
+
+--------------------------------------------------------------------
+2:30 - 4:30 | Repository Architecture (System Design)
+--------------------------------------------------------------------
+"The repository is structured by function:
+- api/: Flask service for inference endpoints
+- app/: Streamlit dashboard for user interaction
+- models/: training logic and serialized model artifacts
+- data/: input datasets
+- deployment/: Dockerfile for container image creation
+- docker-compose.yml: multi-service orchestration
+- kubernetes/, ci_cd/, workflows/: deployment and automation extensions
+
+This separation is a core MLOps design pattern: train, serve, monitor, and deploy as distinct layers."
+
+Reference files:
+- api/app.py
+- app/ui.py
+- models/regression_model.py
+- models/gender_classification_model.py
+- models/recommendation_model.py
+- deployment/Dockerfile
+- docker-compose.yml
+
+--------------------------------------------------------------------
+4:30 - 7:30 | ML Layer: Models and Training Pipelines
+--------------------------------------------------------------------
+"Now I will explain each model pipeline."
+
+"1) Flight Price Predictor:
+It uses engineered categorical features from route, agency, class, and date fields.
+A RandomForestRegressor is trained after scaling.
+Artifacts are saved in models/ as scaler and model pickle files.
+This allows repeatable inference in production."
+
+"2) Gender Classification:
+It converts text name input into embeddings using SentenceTransformer,
+reduces embedding dimensions using PCA,
+combines with numerical fields,
+and trains a Logistic Regression model.
+This hybrid pipeline shows how NLP embeddings can be served in a practical app."
+
+"3) Hotel Recommender:
+It uses collaborative filtering with sparse matrix factorization (SVD).
+Predicted user-item affinity scores are generated and saved into a recommender object.
+This object is used in the UI to show personalized hotel recommendations."
+
+"All training scripts include MLflow run logging, so experiments are trackable."
+
+Reference files:
+- models/regression_model.py
+- models/gender_classification_model.py
+- models/recommendation_model.py
+
+--------------------------------------------------------------------
+7:30 - 9:30 | Serving Layer: Flask API
+--------------------------------------------------------------------
+"For production-style inference, model logic is exposed as API endpoints:
+- /health for service status
+- /predict_flight for regression prediction
+- /predict_gender for classification
+- / for API status and route visibility
+
+This is important because downstream systems and UI can consume a stable API interface
+without knowing internal model details."
+
+Reference file:
+- api/app.py
+
+--------------------------------------------------------------------
+9:30 - 11:00 | Product Layer: Streamlit Dashboard
+--------------------------------------------------------------------
+"The Streamlit app provides three tabs for business users:
+- Flight prediction form
+- Gender prediction form
+- Hotel recommender interface
+
+The app collects user inputs, calls API endpoints, and displays predictions.
+This demonstrates real user-facing model consumption, not just backend experimentation."
+
+Reference file:
+- app/ui.py
+
+--------------------------------------------------------------------
+11:00 - 12:30 | MLOps Tracking with MLflow
+--------------------------------------------------------------------
+"MLflow is used for experiment tracking and artifact management.
+Each training run logs parameters and model/artifact outputs.
+This improves reproducibility, auditability, and comparison between runs."
+
+"In this project, MLflow data is stored locally using:
+- mlflow.db (tracking backend)
+- mlruns/ (artifacts and run files)"
+
+Reference files/folders:
+- mlflow.db
+- mlruns/
+- models/*.py (where mlflow.start_run and log operations are called)
+
+--------------------------------------------------------------------
+12:30 - 13:30 | Deployment Readiness (Docker + Orchestration)
+--------------------------------------------------------------------
+"The project is container-ready:
+Dockerfile defines runtime environment and dependencies.
+docker-compose can launch API and UI services together.
+This ensures environment consistency across machines."
+
+"There are also Kubernetes and CI/CD folders, indicating readiness for scalable deployment
+and automation workflows in real production pipelines."
+
+Reference files:
+- deployment/Dockerfile
+- docker-compose.yml
+- kubernetes/
+- ci_cd/
+
+--------------------------------------------------------------------
+13:30 - 14:30 | Real Integration Challenges and Fixes
+--------------------------------------------------------------------
+"During integration, I handled practical MLOps issues:
+1) Missing dependency (mlflow) at runtime
+2) Git LFS pointer model files (placeholders instead of real binaries)
+3) Service startup/port conflicts
+
+I resolved these by installing missing dependencies,
+regenerating/replacing required model artifacts,
+and verifying API/UI service health endpoints.
+This reflects real-world MLOps debugging and reliability work."
+
+--------------------------------------------------------------------
+14:30 - 15:00 | Conclusion
+--------------------------------------------------------------------
+"To conclude, this project demonstrates end-to-end MLOps:
+Data -> Training -> Artifact serialization -> Experiment tracking ->
+API serving -> UI integration -> Containerized deployment readiness.
+
+The key value is that models are not only trained,
+but made reproducible, accessible, and operational."
+
+"Thank you. I can now take questions on architecture, deployment, or model design choices."
+
+--------------------------------------------------------------------
+Quick Demo Order (Recommended)
+--------------------------------------------------------------------
+1) README.md
+2) api/app.py
+3) app/ui.py
+4) models/regression_model.py
+5) models/gender_classification_model.py
+6) models/recommendation_model.py
+7) deployment/Dockerfile
+8) docker-compose.yml
+
